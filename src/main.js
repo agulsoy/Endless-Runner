@@ -5,13 +5,13 @@
 
 let config = {
     parent: 'myGame',
-    type: Phaser.AUTO,
-    height: 640,
-    width: 960,
+    type: Phaser.CANVAS,
+    height: 480,
+    width: 640,
     scale: {
         autoCenter: Phaser.Scale.CENTER_BOTH
     },
-    
+
     physics: {
         default: 'arcade',
         arcade: {
@@ -23,7 +23,9 @@ let config = {
         }
     } //,
     //scene: [ Menu, Play ]
+
 }
 
+
 // define game
-let game = new Phaser.Game();
+let game = new Phaser.Game(config);
