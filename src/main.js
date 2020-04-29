@@ -22,7 +22,7 @@ let config = {
             }
         }
     },
-    scene: [ Menu ]
+    scene: [ Menu, Play ]
 
 }
 
@@ -34,3 +34,6 @@ let game = new Phaser.Game(config);
 let centerX = game.config.width/2;
 let centerY = game.config.height/2;
 const textSpacer = 50;
+
+// reserve keyboard vars
+let keySPACE
