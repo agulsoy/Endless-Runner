@@ -4,7 +4,7 @@ class Play extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('paddle', './assets/img/Endless Runner Character.png');
+        this.load.image('paddle', './assets/Endless Runner Character.png');
     }
 
     create() {
@@ -116,5 +116,6 @@ class Play extends Phaser.Scene {
          paddle.destroy();              
          // switch states after timer expires
          //this.time.delayedCall(3000, () => { this.scene.start('gameOverScene'); });
+         this.scene.start('gameOverScene');
      }
  }
