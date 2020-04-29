@@ -5,6 +5,7 @@ class Play extends Phaser.Scene {
 
     preload() {
         this.load.image('paddle', './assets/Endless Runner Character.png');
+        this.load.image('platform', './assets/TempPlatform.png');
     }
 
     create() {
