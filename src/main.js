@@ -21,11 +21,16 @@ let config = {
                 y: 0
             }
         }
-    } //,
-    //scene: [ Menu, Play ]
+    },
+    scene: [ Menu ]
 
 }
 
 
 // define game
 let game = new Phaser.Game(config);
+
+// define globals
+let centerX = game.config.width/2;
+let centerY = game.config.height/2;
+const textSpacer = 50;
