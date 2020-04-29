@@ -34,6 +34,15 @@ let game = new Phaser.Game(config);
 let centerX = game.config.width/2;
 let centerY = game.config.height/2;
 const textSpacer = 50;
+let paddle = null;
+const paddleWidth = 16;
+const paddleHeight = 128;
+const paddleVelocity = 150;
+let level;
+let highScore;
+let newHighScore = false;
+let cursors;
 
 // reserve keyboard vars
 let keySPACE
+

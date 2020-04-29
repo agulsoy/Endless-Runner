@@ -3,8 +3,118 @@ class Play extends Phaser.Scene {
         super('playScene');
     }
 
-    create() {
-        // add menu screen text
-        this.add.text(centerX, (centerY - (centerY/2)), 'Test', { fontFamily: 'Helvetica', fontSize: '48px', color: '#33A2FF' }).setOrigin(0.5);
+    preload() {
+        this.load.image('paddle', './assets/img/Endless Runner Character.png');
     }
-}
+
+    create() {
+         // reset parameters
+         this.barrierSpeed = -450;
+         this.barrierSpeedMax = -1000;
+         level = 0;
+         this.extremeMODE = false;
+         this.shadowLock = false;
+ 
+         // set up cursor keys
+         cursors = this.input.keyboard.createCursorKeys();
+ 
+         // set up paddle (physics sprite)
+         paddle = this.physics.add.sprite(32, centerY, 'paddle').setOrigin(0.5);
+         paddle.setCollideWorldBounds(true);
+         paddle.setBounce(0.5);
+         paddle.setImmovable();
+         paddle.setMaxVelocity(0, 600);
+         paddle.setDragY(200);
+         paddle.setDepth(1);         // ensures that paddle z-depth remains above shadow paddles
+         paddle.destroyed = false;   // custom property to track paddle life
+ 
+         // set up barrier group and add first barrier to kick things off
+         this.barrierGroup = this.add.group({
+             runChildUpdate: true    // make sure update runs on group children
+         });
+         this.addBarrier();
+ 
+         // set up difficulty timer (triggers callback every second)
+         this.difficultyTimer = this.time.addEvent({
+             delay: 1000,
+             callback: this.levelBump,
+             callbackScope: this,
+             loop: true
+         });
+     }
+ 
+     addBarrier() {
+         let barrier = new Barrier(this, this.barrierSpeed);     // create new barrier
+         this.barrierGroup.add(barrier);                         // add it to existing group
+     }
+ 
+     update() {
+         if(!paddle.destroyed) {
+             // check for player input
+             if(cursors.up.isDown) {
+                 paddle.body.velocity.y -= paddleVelocity;
+             } else if(cursors.down.isDown) {
+                 paddle.body.velocity.y += paddleVelocity;
+             }
+             // check for collisions
+             this.physics.world.collide(paddle, this.barrierGroup, this.paddleCollision, null, this);
+         }
+ 
+         // spawn rainbow trail if in EXTREME mode
+         if(this.extremeMODE && !this.shadowLock && !paddle.destroyed) {
+             this.spawnShadowPaddles();
+             this.shadowLock = true;
+             // lock shadow paddle spawning to a given time interval
+             this.time.delayedCall(15, () => { this.shadowLock = false; })
+         }
+     }
+ 
+     levelBump() {
+         // increment level (aka score)
+         level++;
+ 
+         // bump speed every 5 levels
+         if(level % 5 == 0) {
+             //console.log(`level: ${level}, speed: ${this.barrierSpeed}`);
+             if(this.barrierSpeed >= this.barrierSpeedMax) {     // increase barrier speed
+                 this.barrierSpeed -= 25;
+             }
+         }
+         // set HARD mode
+         if(level == 45) {
+             paddle.scaleY = 0.75;
+         }
+         // set EXTREME mode
+         if(level == 75) {
+             paddle.scaleY = 0.5;
+             this.extremeMODE = true;
+         }
+     }
+ 
+     spawnShadowPaddles() {
+         // add a "shadow paddle" at main paddle position
+         let shadowPaddle = this.add.image(paddle.x, paddle.y, 'paddle').setOrigin(0.5);
+         shadowPaddle.scaleY = paddle.scaleY;            // scale to parent paddle
+         shadowPaddle.tint = Math.random() * 0xFFFFFF;   // tint w/ rainbow colors
+         shadowPaddle.alpha = 0.5;                       // make semi-transparent
+         // tween alpha to 0
+         this.tweens.add({ 
+             targets: shadowPaddle, 
+             alpha: { from: 0.5, to: 0 }, 
+             duration: 750,
+             ease: 'Linear',
+             repeat: 0 
+         });
+         // set a kill timer for trail effect
+         this.time.delayedCall(750, () => { shadowPaddle.destroy(); } );
+     }
+ 
+     paddleCollision() {
+         paddle.destroyed = true;                    // turn off collision checking
+         this.difficultyTimer.destroy();             // shut down timer
+         // kill paddle
+         paddle.destroy();              
+         // switch states after timer expires
+         //this.time.delayedCall(3000, () => { this.scene.start('gameOverScene'); });
+     }
+ }
