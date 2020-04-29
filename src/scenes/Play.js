@@ -20,12 +20,12 @@ class Play extends Phaser.Scene {
          cursors = this.input.keyboard.createCursorKeys();
  
          // set up paddle (physics sprite)
-         paddle = this.physics.add.sprite(32, centerY, 'paddle').setOrigin(0.5);
+         paddle = this.physics.add.sprite(centerX, 448, 'paddle').setOrigin(0.5);
          paddle.setCollideWorldBounds(true);
          paddle.setBounce(0.5);
          paddle.setImmovable();
-         paddle.setMaxVelocity(0, 600);
-         paddle.setDragY(200);
+         paddle.setMaxVelocity(600, 0);
+         paddle.setDragX(200);
          paddle.setDepth(1);         // ensures that paddle z-depth remains above shadow paddles
          paddle.destroyed = false;   // custom property to track paddle life
  
@@ -52,10 +52,10 @@ class Play extends Phaser.Scene {
      update() {
          if(!paddle.destroyed) {
              // check for player input
-             if(cursors.up.isDown) {
-                 paddle.body.velocity.y -= paddleVelocity;
-             } else if(cursors.down.isDown) {
-                 paddle.body.velocity.y += paddleVelocity;
+             if(cursors.left.isDown) {
+                 paddle.body.velocity.x -= paddleVelocity;
+             } else if(cursors.right.isDown) {
+                 paddle.body.velocity.x += paddleVelocity;
              }
              // check for collisions
              this.physics.world.collide(paddle, this.barrierGroup, this.paddleCollision, null, this);
