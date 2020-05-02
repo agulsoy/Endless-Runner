@@ -7,9 +7,10 @@ class Play extends Phaser.Scene {
         //load images
         this.load.image('paddle', './assets/Endless Runner Character.png');
         this.load.image('platform', './assets/PlatformLong.png');
+        this.load.image('background1', './assets/Endless Runner Background2.png');
 
         // load spritesheet
-        this.load.spritesheet('fire', './assets/Fire.png', {frameWidth: 640, frameHeight: 40, startFrame: 0, endFrame: 6});
+        this.load.spritesheet('fireani', './assets/Fire.png', {frameWidth: 640, frameHeight: 40, startFrame: 0, endFrame: 6});
     }
 
     create() {
@@ -28,10 +29,8 @@ class Play extends Phaser.Scene {
          // set up cursor keys
          cursors = this.input.keyboard.createCursorKeys();
 
-         // set up fire (physics sprite)
-         this.fire = this.physics.add.sprite(centerX, 640, 'fireani').setOrigin(0.5);
-         this.fire.setCollideWorldBounds(true);
-         this.fire.setImmovable();
+         //place tilesprite
+         this.background1 = this.add.tileSprite(0, 0, 640, 480, 'background1').setOrigin(0, 0);
  
          // set up paddle (physics sprite)
          paddle = this.physics.add.sprite(centerX, 448, 'paddle').setOrigin(0.5);
@@ -49,6 +48,12 @@ class Play extends Phaser.Scene {
              runChildUpdate: true    // make sure update runs on group children
          });
          this.addBarrier();
+
+         // set up fire (physics sprite)
+         this.fire = this.physics.add.sprite(centerX, 640, 'fireani').setOrigin(0.5);
+         this.fire.setCollideWorldBounds(true);
+         this.fire.setImmovable();
+         this.fire.setDepth(1);
  
          // set up difficulty timer (triggers callback every second)
          this.difficultyTimer = this.time.addEvent({
@@ -61,10 +66,13 @@ class Play extends Phaser.Scene {
         // fire animation config
         this.anims.create({
             key: 'fireani',
-            frames: this.anims.generateFrameNumbers('fire', { start: 0, end: 6, first: 0}),
+            frames: this.anims.generateFrameNumbers('fireani', { start: 0, end: 6, first: 0}),
             frameRate: 2,
             repeat: -1
         });
+
+        //play animations
+        this.fire.anims.play('fireani');
          
      }
  
@@ -109,6 +117,9 @@ class Play extends Phaser.Scene {
 
          }
 
+         // scroll background
+        this.background1.tilePositionY -= 5;
+
          // hide fire if time not past 7
          if(level < 7){
              this.fire.alpha = 0;
@@ -126,9 +137,6 @@ class Play extends Phaser.Scene {
          }
 
          this.isJumping = false;
-
-         //play animations
-         this.fire.anims.play('fireani');
      }
  
      levelBump() {
