@@ -7,6 +7,7 @@ class Barrier extends Phaser.Physics.Arcade.Sprite {
         // set up physics sprite
         scene.add.existing(this);               // add to existing scene, displayList, updateList
         scene.physics.add.existing(this);       // add physics body
+        this.body.setAllowGravity(false);
         this.setVelocityY(-1 * velocity);            // make it go!
         this.setImmovable();                    
         this.tint = Math.random() * 0xFFFFFF;   // randomize tint

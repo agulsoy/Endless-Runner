@@ -10,7 +10,7 @@ class Play extends Phaser.Scene {
 
     create() {
          // reset parameters
-         this.barrierSpeed = -450;
+         this.barrierSpeed = -150;
          this.barrierSpeedMax = -1000;
          level = 0;
          this.extremeMODE = false;
@@ -18,7 +18,7 @@ class Play extends Phaser.Scene {
 
          //set up world physics
          this.physics.world.gravity.y = 2000;
-         this.JUMP_VELOCITY = -2000;
+         this.JUMP_VELOCITY = -800;
          this.hasJumped = false;
  
          // set up cursor keys
@@ -29,12 +29,12 @@ class Play extends Phaser.Scene {
          paddle.setCollideWorldBounds(true);
          paddle.setBounce(0.5);
          paddle.setImmovable();
-         paddle.setMaxVelocity(600, 600);
+         paddle.setMaxVelocity(600, 1200);
          paddle.setDragX(200);
          paddle.setDepth(1);         // ensures that paddle z-depth remains above shadow paddles
          paddle.destroyed = false;   // custom property to track paddle life
  
-         /*
+         
          // set up barrier group and add first barrier to kick things off
          this.barrierGroup = this.add.group({
              runChildUpdate: true    // make sure update runs on group children
@@ -48,7 +48,7 @@ class Play extends Phaser.Scene {
              callbackScope: this,
              loop: true
          });
-         */
+         
      }
  
      addBarrier() {
