@@ -21,8 +21,8 @@ class Barrier extends Phaser.Physics.Arcade.Sprite {
         // override physics sprite update()
         super.update();
 
-        // add new barrier when existing barrier hits center X
-        if(this.newBarrier && this.y > centerY) {
+        // add new barrier when existing barrier hits center Y
+        if(this.newBarrier && this.y > (centerY/2)) {
             this.newBarrier = false;
             // call parent scene method from this context
             this.scene.addBarrier(this.parent, this.velocity);
