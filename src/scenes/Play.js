@@ -18,8 +18,6 @@ class Play extends Phaser.Scene {
          this.barrierSpeed = -75;
          this.barrierSpeedMax = -100;
          level = 0;
-         this.extremeMODE = false;
-         this.shadowLock = false;
 
          //set up world physics
          this.physics.world.gravity.y = 500;
@@ -97,11 +95,12 @@ class Play extends Phaser.Scene {
                  this.hasJumped = true;
              }
 
-             //if paddle sprite is changed remember to check hardcoded value paddleWidth!
+             //if on the ground, we can jump again
              if(paddle.y > ((centerY * 2) - (33))) {
                 this.hasJumped = false;
              }
 
+             //if the player touches the fire game over, fire only spawns after 7
              if(level >= 7) {
                 if(paddle.y > ((centerY * 2) - (30))){
                     paddle.destroyed = true;                    // turn off collision checking
@@ -127,14 +126,6 @@ class Play extends Phaser.Scene {
          else {
              this.fire.alpha = 1;
          }
- 
-         // spawn rainbow trail if in EXTREME mode
-         if(this.extremeMODE && !this.shadowLock && !paddle.destroyed) {
-             this.spawnShadowPaddles();
-             this.shadowLock = true;
-             // lock shadow paddle spawning to a given time interval
-             this.time.delayedCall(15, () => { this.shadowLock = false; })
-         }
 
          this.isJumping = false;
      }
@@ -150,33 +141,6 @@ class Play extends Phaser.Scene {
                  this.barrierSpeed -= 25;
              }
          }
-         // set HARD mode
-         if(level == 45) {
-             paddle.scaleY = 0.75;
-         }
-         // set EXTREME mode
-         if(level == 75) {
-             paddle.scaleY = 0.5;
-             this.extremeMODE = true;
-         }
-     }
- 
-     spawnShadowPaddles() {
-         // add a "shadow paddle" at main paddle position
-         let shadowPaddle = this.add.image(paddle.x, paddle.y, 'paddle').setOrigin(0.5);
-         shadowPaddle.scaleY = paddle.scaleY;            // scale to parent paddle
-         shadowPaddle.tint = Math.random() * 0xFFFFFF;   // tint w/ rainbow colors
-         shadowPaddle.alpha = 0.5;                       // make semi-transparent
-         // tween alpha to 0
-         this.tweens.add({ 
-             targets: shadowPaddle, 
-             alpha: { from: 0.5, to: 0 }, 
-             duration: 750,
-             ease: 'Linear',
-             repeat: 0 
-         });
-         // set a kill timer for trail effect
-         this.time.delayedCall(750, () => { shadowPaddle.destroy(); } );
      }
  
      /*
