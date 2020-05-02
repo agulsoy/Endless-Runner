@@ -1,7 +1,9 @@
 'use strict';
 
 // define and configure main Phaser game object
-
+let titleScene = new TitleScene();
+let menuScene = new Menu();
+let playScene = new Play();
 
 let config = {
     parent: 'myGame',
@@ -22,13 +24,20 @@ let config = {
             }
         }
     },
-    scene: [ Menu, Play, GameOver ]
+    scene: [ TitleScene, Menu, Play, GameOver ]
 
 }
 
 
 // define game
 let game = new Phaser.Game(config);
+
+game.scene.add('TitleScene', titleScene);
+game.scene.start('menuScene');
+
+game.scene.add('menuScene', menuScene);
+
+game.scene.add('playScene', playScene);
 
 // define globals
 let centerX = game.config.width/2;
