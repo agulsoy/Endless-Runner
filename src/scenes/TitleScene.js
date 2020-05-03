@@ -5,20 +5,27 @@ class TitleScene extends Phaser.Scene{
 
     preload(){
         this.load.image('slimeBall', './assets/regular_Ball.png');
-        this.load.spritesheet('Explosion', './assets/Explosion.png', {frameWidth: 640, frameHeight: 480, startFrame: 0, endFrame: 7});
+        this.load.spritesheet('Explosion', './assets/Explosion.png', {frameWidth: 640, frameHeight: 480, startFrame: 0, endFrame: 22});
     }
 
     create(){
+        var config = {
+            key: 'explode',
+            frames: this.anims.generateFrameNumbers('Explosion', {start: 0, end: 22, first: 0}),
+            frameRate: 17,
+        };
+        this.anims.create(config);
+
+        var Explosion = this.add.sprite(game.config.width/2-280, game.config.height/2-300, 'Explosion').setOrigin(0,0);
+        Explosion.anims.play('explode');
+
         //adding animation
         // this.anims.create({
-        //     key: 'explode',
-        //     frames: this.anims.generateFrameNumbers('Explosion', {start: 0, end: 7, first: 0}),
-        //     frameRate: 20
+        //      key: 'explode',
+        //      frames: this.anims.generateFrameNumbers('Explosion', {start: 0, end: 7, first: 0}),
+        //      frameRate: 20
         // });
 
-        //adding title sprite
-        let slime_Ball = this.add.sprite(game.config.width/2-320, game.config.height/2-300, 'slimeBall').setOrigin(0, 0)
-        .setOrigin(0, 0);
         //adding text for title scene
         let centerX = game.config.width/2;
         let centerY = game.config.height/2;
@@ -54,12 +61,13 @@ class TitleScene extends Phaser.Scene{
             this.scene.transition({target: 'menuScene', duration: 100 })
         }, this);
     }
+    
 
     update(){
-        // let boom = this.add.sprite('Explosion').setOrigin(0, 0);
-        // boom.anims.play('explode'); //play explode animation
-        // boom.on('animationcomplete', () => {    //callback after animation complete
-        //     boom.destroy(); //remove explosion sprite
-        // });
-    }   
+        //  let boom = this.add.sprite('Explosion').setOrigin(0, 0);
+        //  boom.anims.play('explode'); //play explode animation
+        //  boom.on('animationcomplete', () => {  //callback after animation complete
+        //      boom.destroy(); //remove explosion sprite
+        //  });
+    }
 }
