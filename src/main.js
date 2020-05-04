@@ -1,3 +1,6 @@
+//Based on code from Nathan Altice's Paddle Parkour 3 
+//https://github.com/nathanaltice/PaddleParkourP3
+
 'use strict';
 
 // define and configure main Phaser game object
