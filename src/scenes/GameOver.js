@@ -27,7 +27,7 @@ class GameOver extends Phaser.Scene {
 
 
         this.add.text(centerX, (centerY - (centerY/2)), 'Game Over', { fontFamily: 'Helvetica', fontSize: '48px', color: '#33A2FF' }).setOrigin(0.5);
-        this.add.text(centerX, (centerY), `Your score is: ${highScore} The high score is: ${highScore}`, { fontFamily: 'Helvetica', fontSize: '24px', color: '#33A2FF' }).setOrigin(0.5);
+        this.add.text(centerX, (centerY), `Your score is: ${level} The high score is: ${highScore}`, { fontFamily: 'Helvetica', fontSize: '24px', color: '#33A2FF' }).setOrigin(0.5);
         this.add.text(centerX, centerY + (centerY/2), 'Press SPACEBAR to return to menu', { fontFamily: 'Helvetica', fontSize: '24px', color: '#33E6FF' }).setOrigin(0.5);
 
         // define keys

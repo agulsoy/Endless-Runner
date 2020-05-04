@@ -53,7 +53,7 @@ class Play extends Phaser.Scene {
          paddle.setCollideWorldBounds(true);
          paddle.setBounce(0.5);
          paddle.setImmovable();
-         paddle.setMaxVelocity(600, 1200);
+         paddle.setMaxVelocity(600, 1200);    // make sure the player can move in both x and y directions 
          paddle.setDragX(200);
          paddle.setDepth(1);         // ensures that paddle z-depth remains above shadow paddles
          paddle.destroyed = false;   // custom property to track paddle life
@@ -132,7 +132,7 @@ class Play extends Phaser.Scene {
 
              //if the player touches the fire game over, fire only spawns after 7
              if(level >= 7) {
-                if(paddle.y > ((centerY * 2) - (30))){
+                if(paddle.y > ((centerY * 2) - (30))){          //if the player ia at a certain y (where the fire is)
                     paddle.destroyed = true;                    // turn off collision checking
                     this.difficultyTimer.destroy();             // shut down timer
                     // kill paddle
@@ -143,7 +143,6 @@ class Play extends Phaser.Scene {
              }
              // check for collisions
              this.physics.world.collide(paddle, this.barrierGroup, this.paddleCollision, null, this);
-             //this.physics.add.collider(paddle, this.barrierGroup);
 
          }
 
@@ -174,6 +173,7 @@ class Play extends Phaser.Scene {
          }
      }
 
+    //let player jump if they are touching the paddle
     paddleCollision() {
         this.hasJumped = false;
         
