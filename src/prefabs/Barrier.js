@@ -1,4 +1,4 @@
-//Based on code from Mathan Altice's Paddle Parkour 3 
+//Based on code from Nathan Altice's Paddle Parkour 3 
 //https://github.com/nathanaltice/PaddleParkourP3
 
 class Barrier extends Phaser.Physics.Arcade.Sprite {

@@ -1,4 +1,4 @@
-//Based on code from Mathan Altice's Paddle Parkour 3 
+//Based on code from Nathan Altice's Paddle Parkour 3 
 //https://github.com/nathanaltice/PaddleParkourP3
 
 class Play extends Phaser.Scene {
@@ -19,6 +19,16 @@ class Play extends Phaser.Scene {
     }
 
     create() {
+        //Score storing
+        //Based on code from Nathan Altice's Paddle Parkour 3 
+        //https://github.com/nathanaltice/PaddleParkourP3
+        // check for local storage browser support
+        if(window.localStorage) {
+            console.log('Local storage supported');
+        } else {
+            console.log('Local storage not supported');
+        }
+
          // reset parameters
          this.barrierSpeed = -75;
          this.barrierSpeedMax = -100;
@@ -127,8 +137,8 @@ class Play extends Phaser.Scene {
                     this.difficultyTimer.destroy();             // shut down timer
                     // kill paddle
                     paddle.destroy(); 
-                    game.sound.stopAll();             
-                    this.scene.start('gameOverScene');
+                    game.sound.stopAll();        
+                    this.time.delayedCall(2000, () => { this.scene.start('gameOverScene'); });     
                 }
              }
              // check for collisions
@@ -163,18 +173,6 @@ class Play extends Phaser.Scene {
              }
          }
      }
- 
-     /*
-     paddleCollision() {
-         paddle.destroyed = true;                    // turn off collision checking
-         this.difficultyTimer.destroy();             // shut down timer
-         // kill paddle
-         paddle.destroy();              
-         // switch states after timer expires
-         //this.time.delayedCall(3000, () => { this.scene.start('gameOverScene'); });
-         this.scene.start('gameOverScene');
-     }
-     */
 
     paddleCollision() {
         this.hasJumped = false;
