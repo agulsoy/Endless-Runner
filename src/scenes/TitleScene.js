@@ -6,25 +6,25 @@ class TitleScene extends Phaser.Scene{
     preload(){
         this.load.image('slimeBall', './assets/regular_Ball.png');
         this.load.spritesheet('Explosion', './assets/Explosion.png', {frameWidth: 640, frameHeight: 480, startFrame: 0, endFrame: 22});
+        this.load.audio('Squishy', './assets/squishy_SFX.mp3');
     }
 
     create(){
+        //adding animation to the scene
         var config = {
             key: 'explode',
             frames: this.anims.generateFrameNumbers('Explosion', {start: 0, end: 22, first: 0}),
             frameRate: 17,
         };
         this.anims.create(config);
-
+        
         var Explosion = this.add.sprite(game.config.width/2-280, game.config.height/2-300, 'Explosion').setOrigin(0,0);
         Explosion.anims.play('explode');
 
-        //adding animation
-        // this.anims.create({
-        //      key: 'explode',
-        //      frames: this.anims.generateFrameNumbers('Explosion', {start: 0, end: 7, first: 0}),
-        //      frameRate: 20
-        // });
+        if(this.anims.isPlaying === 'explode'){
+            //add audio
+            this.sound.play('Squishy');
+        }
 
         //adding text for title scene
         let centerX = game.config.width/2;
@@ -64,10 +64,6 @@ class TitleScene extends Phaser.Scene{
     
 
     update(){
-        //  let boom = this.add.sprite('Explosion').setOrigin(0, 0);
-        //  boom.anims.play('explode'); //play explode animation
-        //  boom.on('animationcomplete', () => {  //callback after animation complete
-        //      boom.destroy(); //remove explosion sprite
-        //  });
+
     }
 }
