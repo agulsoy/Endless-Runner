@@ -35,31 +35,23 @@ class Menu extends Phaser.Scene {
         let centerY = game.config.height/2;
         let textSpacer = 64;
 
-        this.add.text(centerX, (centerY - (centerY/2)), ' Endless Climber ', menuConfig).setOrigin(0.5);
+        this.add.text(centerX, (centerY - (centerY/2))-60, ' Endless Climber ', menuConfig).setOrigin(0.5);
         menuConfig.fontSize = '24px';
         menuConfig.color = '#33E6FF';
-<<<<<<< HEAD
-        this.add.text(centerX, centerY + (centerY/2)-150, ' Instructions: ', menuConfig).setOrigin(0.5);
-        this.add.text(centerX, centerY + (centerY/2)-90, ' Press              to move to the right ', menuConfig).setOrigin(0.5);
-        this.add.image(centerX -70, centerY + (centerY/2)-90, 'RightArrow1').setScale(.5, .5).setOrigin(0.5);
-        this.add.text(centerX, centerY + (centerY/2)-45, ' Press              to move to the left ', menuConfig).setOrigin(0.5);
-        this.add.image(centerX -70, centerY + (centerY/2)-40, 'LeftArrow').setScale(.5, .5).setOrigin(0.5);
-        this.add.text(centerX, centerY + (centerY/2)+10, ' Press        to jump ', menuConfig).setOrigin(0.5);
-        this.add.image(centerX -10, centerY + (centerY/2)+10, 'UpArrow').setScale(.5, .5).setOrigin(0.5);
-        this.add.text(centerX, centerY + (centerY/2)+70, ' Press SPACEBAR to Start ', menuConfig).setOrigin(0.5);
-=======
-        this.add.text(centerX, centerY + (centerY/2)-180, 'Instructions:', menuConfig).setOrigin(0.5);
-        this.add.text(centerX, centerY + (centerY/2)-120, 'Press              to move to the right', menuConfig).setOrigin(0.5);
-        this.add.image(centerX -70, centerY + (centerY/2)-120, 'RightArrow1').setScale(.5, .5).setOrigin(0.5);
-        this.add.text(centerX, centerY + (centerY/2)-75, 'Press              to move to the left', menuConfig).setOrigin(0.5);
-        this.add.image(centerX -70, centerY + (centerY/2)-70, 'LeftArrow').setScale(.5, .5).setOrigin(0.5);
-        this.add.text(centerX, centerY + (centerY/2)-20, 'Press        to jump', menuConfig).setOrigin(0.5);
-        this.add.image(centerX -10, centerY + (centerY/2)-20, 'UpArrow').setScale(.5, .5).setOrigin(0.5);
-        this.add.text(centerX, centerY + (centerY/2)+10, 'Move to the floating bars and press jump', menuConfig).setOrigin(0.5);
-        this.add.text(centerX, centerY + (centerY/2)+40, 'To avoid falling into the fire', menuConfig).setOrigin(0.5);
-        this.add.text(centerX, centerY + (centerY/2)+80, 'Press SPACEBAR to Start', menuConfig).setOrigin(0.5);
->>>>>>> 3719d8ff0dd20e1384c456123405f54f543e07af
+        this.add.text(90, centerY + (centerY/2)-210, ' Instructions: ', menuConfig).setOrigin(0.5);
+        this.add.text(205, centerY + (centerY/2)-160, ' Press              to move to the right ', menuConfig).setOrigin(0.5);
+        this.add.image(205 -70, centerY + (centerY/2)-160, 'RightArrow1').setScale(.5, .5).setOrigin(0.5);
+        this.add.text(197, centerY + (centerY/2)-100, ' Press              to move to the left ', menuConfig).setOrigin(0.5);
+        this.add.image(197 -70, centerY + (centerY/2)-100, 'LeftArrow').setScale(.5, .5).setOrigin(0.5);
+        this.add.text(120, centerY + (centerY/2)-30, ' Press        to jump ', menuConfig).setOrigin(0.5);
+        this.add.image(120 -10, centerY + (centerY/2)-30, 'UpArrow').setScale(.5, .5).setOrigin(0.5);
+        this.add.text(centerX, centerY + (centerY/2)+80, ' Press SPACEBAR to Start ', menuConfig).setOrigin(0.5);
 
+        menuConfig.backgroundColor= '#000000';
+        menuConfig.color= '#33A2FF';
+        this.add.text(centerX+210, centerY + (centerY/2)-135, ' Move to the \nfloating bars \nand press jump ', menuConfig).setOrigin(0.5);
+        this.add.text(centerX+210, centerY + (centerY/2)-30, ' To avoid falling \ninto the fire ', menuConfig).setOrigin(0.5);
+        
         // define keys
         keySPACE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 

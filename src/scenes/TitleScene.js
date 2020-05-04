@@ -15,17 +15,14 @@ class TitleScene extends Phaser.Scene{
             key: 'explode',
             frames: this.anims.generateFrameNumbers('Explosion', {start: 0, end: 22, first: 0}),
             frameRate: 17,
-            repeat: -1
         };
         this.anims.create(config);
         
         var Explosion = this.add.sprite(game.config.width/2-280, game.config.height/2-300, 'Explosion').setOrigin(0,0);
         Explosion.anims.play('explode');
 
-        if(this.anims.isPlaying === 'explode'){
-            //add audio
-            this.sound.play('Squishy');
-        }
+        //add audio
+        this.sound.play('Squishy');
 
         //adding text for title scene
         let centerX = game.config.width/2;
