@@ -26,7 +26,7 @@ class GameOver extends Phaser.Scene {
         }
 
         let overConfig = {
-            fontFamily: 'Helvetica',
+            fontFamily: 'Times New Roman',
             fontSize: '48px',
             backgroundColor: '#000000',
             color: '#33A2FF',
@@ -43,7 +43,7 @@ class GameOver extends Phaser.Scene {
         this.add.text(centerX, (centerY), `YOUR SCORE: ${level} \n\nYOUR HIGH SCORE: ${highScore}`, overConfig).setOrigin(0.5);
         overConfig.fontSize = '25px';
         overConfig.color = '#33E6FF';
-        this.add.text(centerX, centerY + (centerY/2), 'Press SPACEBAR to return to menu', { fontFamily: 'Helvetica', fontSize: '24px', color: '#33E6FF' }).setOrigin(0.5);
+        this.add.text(centerX, centerY + (centerY/2), 'Press SPACEBAR to return to menu', overConfig).setOrigin(0.5);
 
         // define keys
         keySPACE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);

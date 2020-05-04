@@ -18,7 +18,7 @@ class Menu extends Phaser.Scene {
 
         //menu configuration
         let menuConfig = {
-            fontFamily: 'Helvetica',
+            fontFamily: 'Times New Roman',
             fontSize: '48px',
             backgroundColor: '#000000',
             color: '#33A2FF',
@@ -36,15 +36,15 @@ class Menu extends Phaser.Scene {
         let textSpacer = 64;
 
         this.add.text(centerX, (centerY - (centerY/2))-60, ' Endless Climber ', menuConfig).setOrigin(0.5);
-        menuConfig.fontSize = '24px';
+        menuConfig.fontSize = '25px';
         menuConfig.color = '#33E6FF';
         this.add.text(90, centerY + (centerY/2)-210, ' Instructions: ', menuConfig).setOrigin(0.5);
-        this.add.text(205, centerY + (centerY/2)-160, ' Press              to move to the right ', menuConfig).setOrigin(0.5);
-        this.add.image(205 -70, centerY + (centerY/2)-160, 'RightArrow1').setScale(.5, .5).setOrigin(0.5);
-        this.add.text(197, centerY + (centerY/2)-100, ' Press              to move to the left ', menuConfig).setOrigin(0.5);
-        this.add.image(197 -70, centerY + (centerY/2)-100, 'LeftArrow').setScale(.5, .5).setOrigin(0.5);
-        this.add.text(120, centerY + (centerY/2)-30, ' Press        to jump ', menuConfig).setOrigin(0.5);
-        this.add.image(120 -10, centerY + (centerY/2)-30, 'UpArrow').setScale(.5, .5).setOrigin(0.5);
+        this.add.text(196, centerY + (centerY/2)-160, ' Press              to move to the right ', menuConfig).setOrigin(0.5);
+        this.add.image(196 -70, centerY + (centerY/2)-160, 'RightArrow1').setScale(.5, .5).setOrigin(0.5);
+        this.add.text(191, centerY + (centerY/2)-100, ' Press              to move to the left ', menuConfig).setOrigin(0.5);
+        this.add.image(191 -70, centerY + (centerY/2)-100, 'LeftArrow').setScale(.5, .5).setOrigin(0.5);
+        this.add.text(118, centerY + (centerY/2)-30, ' Press        to jump ', menuConfig).setOrigin(0.5);
+        this.add.image(118 -10, centerY + (centerY/2)-30, 'UpArrow').setScale(.5, .5).setOrigin(0.5);
         this.add.text(centerX, centerY + (centerY/2)+80, ' Press SPACEBAR to Start ', menuConfig).setOrigin(0.5);
 
         menuConfig.backgroundColor= '#000000';
