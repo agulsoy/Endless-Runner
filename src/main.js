@@ -1,3 +1,17 @@
+/*Name of Game: Jump For Life
+
+  Team members: Pierce Sullivan, Lucky Medikonda, Alex Gulsoy
+
+  Date Completed: 3 May 2020, 5/3/2020
+  
+  Creative Tilt: We find that our game is technically interesting because 
+  the player must move in both the x and y axes, while constantly having to keep jumping 
+  rather than simply sliding up. In order to make our character jump we used the 
+  Phaser Arcade Physics engine to make sure we achieved a very unique jumping effect. 
+  Additionally, we made certain that the platforms moved slightly side to side after 10 seconds. 
+  Furthermore, Our game has a great visual aesthetic to it because each asset is custom drawn by hand,
+  and we added a title screen with an animation which we found visually appealing.
+*/
 //Based on code from Nathan Altice's Paddle Parkour 3 
 //https://github.com/nathanaltice/PaddleParkourP3
 
