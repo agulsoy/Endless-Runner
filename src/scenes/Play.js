@@ -1,3 +1,6 @@
+//Based on code from Mathan Altice's Paddle Parkour 3 
+//https://github.com/nathanaltice/PaddleParkourP3
+
 class Play extends Phaser.Scene {
     constructor() {
         super('playScene');
@@ -5,12 +8,14 @@ class Play extends Phaser.Scene {
 
     preload() {
         //load images
-        this.load.image('paddle', './assets/Endless Runner Character.png');
+        //this.load.image('paddle', './assets/Endless Runner Character.png');
         this.load.image('platform', './assets/PlatformLong.png');
         this.load.image('background1', './assets/Endless Runner Background2.png');
 
         // load spritesheet
         this.load.spritesheet('fireani', './assets/Fire.png', {frameWidth: 640, frameHeight: 40, startFrame: 0, endFrame: 6});
+        this.load.spritesheet('playerani', './assets/Endless Runner Character Bounce Animation.png', {frameWidth: 32, frameHeight: 32, startFrame: 0, endFrame: 19});
+
     }
 
     create() {
@@ -34,7 +39,7 @@ class Play extends Phaser.Scene {
         this.sound.play('background');
  
          // set up paddle (physics sprite)
-         paddle = this.physics.add.sprite(centerX, 448, 'paddle').setOrigin(0.5);
+         paddle = this.physics.add.sprite(centerX, 448, 'playerani').setOrigin(0.5);
          paddle.setCollideWorldBounds(true);
          paddle.setBounce(0.5);
          paddle.setImmovable();
@@ -72,6 +77,13 @@ class Play extends Phaser.Scene {
             repeat: -1
         });
 
+        // bounce animation config
+        this.anims.create({
+            key: 'playerani',
+            frames: this.anims.generateFrameNumbers('playerani', { start: 0, end: 19, first: 0}),
+            frameRate: 10
+        });
+
         //play animations
         this.fire.anims.play('fireani');
          
@@ -98,6 +110,8 @@ class Play extends Phaser.Scene {
                  this.hasJumped = true;
                  //bounce sfx
                  this.sound.play('bounce');
+                 //play animations
+                 paddle.anims.play('playerani');
              }
 
              //if on the ground, we can jump again
