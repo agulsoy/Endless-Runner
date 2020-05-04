@@ -29,6 +29,9 @@ class Play extends Phaser.Scene {
 
          //place tilesprite
          this.background1 = this.add.tileSprite(0, 0, 640, 480, 'background1').setOrigin(0, 0);
+
+         //background music
+        this.sound.play('background');
  
          // set up paddle (physics sprite)
          paddle = this.physics.add.sprite(centerX, 448, 'paddle').setOrigin(0.5);
@@ -93,11 +96,14 @@ class Play extends Phaser.Scene {
              if(Phaser.Input.Keyboard.DownDuration(cursors.up, 150) && (this.hasJumped === false)) {
                  paddle.body.velocity.y = this.JUMP_VELOCITY;
                  this.hasJumped = true;
+                 //bounce sfx
+                 this.sound.play('bounce');
              }
 
              //if on the ground, we can jump again
              if(paddle.y > ((centerY * 2) - (33))) {
                 this.hasJumped = false;
+                 
              }
 
              //if the player touches the fire game over, fire only spawns after 7
@@ -106,7 +112,8 @@ class Play extends Phaser.Scene {
                     paddle.destroyed = true;                    // turn off collision checking
                     this.difficultyTimer.destroy();             // shut down timer
                     // kill paddle
-                    paddle.destroy();              
+                    paddle.destroy(); 
+                    game.sound.stopAll();             
                     this.scene.start('gameOverScene');
                 }
              }
@@ -157,6 +164,7 @@ class Play extends Phaser.Scene {
 
     paddleCollision() {
         this.hasJumped = false;
+        
     }
 
  }

@@ -6,6 +6,9 @@ class Menu extends Phaser.Scene {
         this.load.image('RightArrow1', './assets/right_Arrow1.png');
         this.load.image('LeftArrow', './assets/left_Arrow.png');
         this.load.image('UpArrow', './assets/up_Arrow.png');
+        // load audio
+        this.load.audio('background', './assets/background.wav');
+        this.load.audio('bounce', './assets/bounce.wav');
     }
 
     create() {
