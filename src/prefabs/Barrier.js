@@ -29,6 +29,15 @@ class Barrier extends Phaser.Physics.Arcade.Sprite {
             this.scene.addBarrier(this.parent, this.velocity);
         }
 
+        // make  barrier move left/right to increase difficulty
+        // wait unitil after 10
+        if (level > 10){
+            // if the level is evem
+            if ((level % 2) == 0){
+                this.body.velocity.x = Phaser.Math.Between(-60, 60);
+            }
+        }
+
         // destroy paddle if it reaches the bottom edge of the screen
         if(this.y > (game.config.height)) {
             this.destroy();
