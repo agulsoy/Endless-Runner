@@ -35,7 +35,7 @@ class Menu extends Phaser.Scene {
         let centerY = game.config.height/2;
         let textSpacer = 64;
 
-        this.add.text(centerX, (centerY - (centerY/2))-60, ' Endless Climber ', menuConfig).setOrigin(0.5);
+        this.add.text(centerX, (centerY - (centerY/2))-60, ' Jump For Life ', menuConfig).setOrigin(0.5);
         menuConfig.fontSize = '25px';
         menuConfig.color = '#33E6FF';
         this.add.text(90, centerY + (centerY/2)-210, ' Instructions: ', menuConfig).setOrigin(0.5);
