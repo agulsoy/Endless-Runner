@@ -34,14 +34,16 @@ class Menu extends Phaser.Scene {
         this.add.text(centerX, (centerY - (centerY/2)), 'Endless Climber', menuConfig).setOrigin(0.5);
         menuConfig.fontSize = '24px';
         menuConfig.color = '#33E6FF';
-        this.add.text(centerX, centerY + (centerY/2)-150, 'Instructions:', menuConfig).setOrigin(0.5);
-        this.add.text(centerX, centerY + (centerY/2)-90, 'Press              to move to the right', menuConfig).setOrigin(0.5);
-        this.add.image(centerX -70, centerY + (centerY/2)-90, 'RightArrow1').setScale(.5, .5).setOrigin(0.5);
-        this.add.text(centerX, centerY + (centerY/2)-45, 'Press              to move to the left', menuConfig).setOrigin(0.5);
-        this.add.image(centerX -70, centerY + (centerY/2)-40, 'LeftArrow').setScale(.5, .5).setOrigin(0.5);
-        this.add.text(centerX, centerY + (centerY/2)+10, 'Press        to jump', menuConfig).setOrigin(0.5);
-        this.add.image(centerX -10, centerY + (centerY/2)+10, 'UpArrow').setScale(.5, .5).setOrigin(0.5);
-        this.add.text(centerX, centerY + (centerY/2)+70, 'Press SPACEBAR to Start', menuConfig).setOrigin(0.5);
+        this.add.text(centerX, centerY + (centerY/2)-180, 'Instructions:', menuConfig).setOrigin(0.5);
+        this.add.text(centerX, centerY + (centerY/2)-120, 'Press              to move to the right', menuConfig).setOrigin(0.5);
+        this.add.image(centerX -70, centerY + (centerY/2)-120, 'RightArrow1').setScale(.5, .5).setOrigin(0.5);
+        this.add.text(centerX, centerY + (centerY/2)-75, 'Press              to move to the left', menuConfig).setOrigin(0.5);
+        this.add.image(centerX -70, centerY + (centerY/2)-70, 'LeftArrow').setScale(.5, .5).setOrigin(0.5);
+        this.add.text(centerX, centerY + (centerY/2)-20, 'Press        to jump', menuConfig).setOrigin(0.5);
+        this.add.image(centerX -10, centerY + (centerY/2)-20, 'UpArrow').setScale(.5, .5).setOrigin(0.5);
+        this.add.text(centerX, centerY + (centerY/2)+10, 'Move to the floating bars and press jump', menuConfig).setOrigin(0.5);
+        this.add.text(centerX, centerY + (centerY/2)+40, 'To avoid falling into the fire', menuConfig).setOrigin(0.5);
+        this.add.text(centerX, centerY + (centerY/2)+80, 'Press SPACEBAR to Start', menuConfig).setOrigin(0.5);
 
         // define keys
         keySPACE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
