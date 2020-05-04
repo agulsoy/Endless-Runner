@@ -1,3 +1,6 @@
+//Based on code from Nathan Altice's Paddle Parkour 3 
+//https://github.com/nathanaltice/PaddleParkourP3
+
 class Play extends Phaser.Scene {
     constructor() {
         super('playScene');
@@ -5,15 +8,27 @@ class Play extends Phaser.Scene {
 
     preload() {
         //load images
-        this.load.image('paddle', './assets/Endless Runner Character.png');
+        //this.load.image('paddle', './assets/Endless Runner Character.png');
         this.load.image('platform', './assets/PlatformLong.png');
         this.load.image('background1', './assets/Endless Runner Background2.png');
 
         // load spritesheet
         this.load.spritesheet('fireani', './assets/Fire.png', {frameWidth: 640, frameHeight: 40, startFrame: 0, endFrame: 6});
+        this.load.spritesheet('playerani', './assets/Endless Runner Character Bounce Animation.png', {frameWidth: 32, frameHeight: 32, startFrame: 0, endFrame: 19});
+
     }
 
     create() {
+        //Score storing
+        //Based on code from Nathan Altice's Paddle Parkour 3 
+        //https://github.com/nathanaltice/PaddleParkourP3
+        // check for local storage browser support
+        if(window.localStorage) {
+            console.log('Local storage supported');
+        } else {
+            console.log('Local storage not supported');
+        }
+
          // reset parameters
          this.barrierSpeed = -75;
          this.barrierSpeedMax = -100;
@@ -34,11 +49,11 @@ class Play extends Phaser.Scene {
         this.sound.play('background');
  
          // set up paddle (physics sprite)
-         paddle = this.physics.add.sprite(centerX, 448, 'paddle').setOrigin(0.5);
+         paddle = this.physics.add.sprite(centerX, 448, 'playerani').setOrigin(0.5);
          paddle.setCollideWorldBounds(true);
          paddle.setBounce(0.5);
          paddle.setImmovable();
-         paddle.setMaxVelocity(600, 1200);
+         paddle.setMaxVelocity(600, 1200);    // make sure the player can move in both x and y directions 
          paddle.setDragX(200);
          paddle.setDepth(1);         // ensures that paddle z-depth remains above shadow paddles
          paddle.destroyed = false;   // custom property to track paddle life
@@ -72,6 +87,13 @@ class Play extends Phaser.Scene {
             repeat: -1
         });
 
+        // bounce animation config
+        this.anims.create({
+            key: 'playerani',
+            frames: this.anims.generateFrameNumbers('playerani', { start: 0, end: 19, first: 0}),
+            frameRate: 10
+        });
+
         //play animations
         this.fire.anims.play('fireani');
          
@@ -98,6 +120,8 @@ class Play extends Phaser.Scene {
                  this.hasJumped = true;
                  //bounce sfx
                  this.sound.play('bounce');
+                 //play animations
+                 paddle.anims.play('playerani');
              }
 
              //if on the ground, we can jump again
@@ -108,18 +132,17 @@ class Play extends Phaser.Scene {
 
              //if the player touches the fire game over, fire only spawns after 7
              if(level >= 7) {
-                if(paddle.y > ((centerY * 2) - (30))){
+                if(paddle.y > ((centerY * 2) - (30))){          //if the player ia at a certain y (where the fire is)
                     paddle.destroyed = true;                    // turn off collision checking
                     this.difficultyTimer.destroy();             // shut down timer
                     // kill paddle
                     paddle.destroy(); 
-                    game.sound.stopAll();             
-                    this.scene.start('gameOverScene');
+                    game.sound.stopAll();        
+                    this.time.delayedCall(2000, () => { this.scene.start('gameOverScene'); });     
                 }
              }
              // check for collisions
              this.physics.world.collide(paddle, this.barrierGroup, this.paddleCollision, null, this);
-             //this.physics.add.collider(paddle, this.barrierGroup);
 
          }
 
@@ -149,19 +172,8 @@ class Play extends Phaser.Scene {
              }
          }
      }
- 
-     /*
-     paddleCollision() {
-         paddle.destroyed = true;                    // turn off collision checking
-         this.difficultyTimer.destroy();             // shut down timer
-         // kill paddle
-         paddle.destroy();              
-         // switch states after timer expires
-         //this.time.delayedCall(3000, () => { this.scene.start('gameOverScene'); });
-         this.scene.start('gameOverScene');
-     }
-     */
 
+    //let player jump if they are touching the paddle
     paddleCollision() {
         this.hasJumped = false;
         
